@@ -33,9 +33,20 @@ class HardWork {
   }
 
   do() {
-    for (let i = 0; i < this._tasks.length; i++) {
-      this._tasks[i]();
+    // for (let i = 0; i < this._tasks.length; i++) {
+    //   this._tasks[i]();
+    // }
+    let i = 0;
+    let recursive = () => {
+      if (i <= this._tasks.length) {
+        this._tasks[i]();
+        i++
+        requestAnimationFrame(recursive);
+      } else {
+        cancelAnimationFrame(recursive);
+      }
     }
+    requestAnimationFrame(recursive);
   }
 
   // do() 이외의 메서드는 수정하지마세요
@@ -56,7 +67,7 @@ class HardWork {
     for (let i = 0; i < 1000; i++) {
       const randnum = Math.random();
       const alpha = Math.floor(randnum * 10) % n;
-      
+
       if (alpha > 0) {
         this._result += alpha;
       }
@@ -106,7 +117,7 @@ class Dashboard {
   }
 }
 
-async function main () {
+async function main() {
   const hardWork = new HardWork();
   const dashboard = new Dashboard(hardWork);
 
