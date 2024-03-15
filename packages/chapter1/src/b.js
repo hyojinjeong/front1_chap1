@@ -35,15 +35,16 @@ class HardWork {
   do() {
     let i = 0;
     const recursive = () => {
-      if(this._tasks.length > i){
-        queueMicrotask(() => {
-          setTimeout(this._tasks[i],0);
+      setTimeout(() => {
+        if(this._tasks.length > i){
+          this._tasks[i]();
           i++
           recursive();
-        });
-      } 
-      }
-      recursive();
+        }
+       }
+      )
+    }
+    recursive();
   }
 
   // do() 이외의 메서드는 수정하지마세요
