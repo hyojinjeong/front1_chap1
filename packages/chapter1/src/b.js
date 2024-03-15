@@ -33,20 +33,17 @@ class HardWork {
   }
 
   do() {
-    // for (let i = 0; i < this._tasks.length; i++) {
-    //   this._tasks[i]();
-    // }
     let i = 0;
-    let recursive = () => {
-      if (i <= this._tasks.length) {
-        this._tasks[i]();
-        i++
-        requestAnimationFrame(recursive);
-      } else {
-        cancelAnimationFrame(recursive);
+    const recursive = () => {
+      if(this._tasks.length > i){
+        queueMicrotask(() => {
+          setTimeout(this._tasks[i],0);
+          i++
+          recursive();
+        });
+      } 
       }
-    }
-    requestAnimationFrame(recursive);
+      recursive();
   }
 
   // do() 이외의 메서드는 수정하지마세요
