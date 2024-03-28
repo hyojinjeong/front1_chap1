@@ -24,4 +24,4 @@ export const 발행기관 = obj => {
     })
   })
   return obj;
-}
+} 
